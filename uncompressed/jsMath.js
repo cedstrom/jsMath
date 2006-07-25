@@ -351,7 +351,8 @@ jsMath.Global = {
      */
     Register: function () {
       var parent = jsMath.window.parent;
-      jsMath.isCHMmode = (jsMath.window.location.protocol == 'mk:');
+      if (!jsMath.isCHMode)
+        {jsMath.isCHMmode = (jsMath.window.location.protocol == 'mk:')}
       try {
         if (!jsMath.isCHMmode) this.Domain();
         if (parent.jsMath && parent.jsMath.isGlobal)
@@ -454,12 +455,14 @@ jsMath.Script = {
       throw "jsMath can't load the file '"+url+"'\n"
           + "Error status: "+this.request.status;
     }
+    if (!url.match(/\.js$/)) {return(this.request.responseText)}
     var tmpQueue = this.queue; this.queue = [];
 //    this.debug('xml Eval ['+tmpQueue.length+']');
     jsMath.window.eval(this.request.responseText);
 //    this.debug('xml Done ['+this.queue.length+' + '+tmpQueue.length+']');
     this.blocking = 0; this.queue = this.queue.concat(tmpQueue);
     this.Process();
+    return "";
   },
 
   /********************************************************************
@@ -6108,4 +6111,5 @@ jsMath.Setup.Fonts();
 if (jsMath.document.body) {jsMath.Setup.Body()}
 
 }}
+
 
