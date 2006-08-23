@@ -38,8 +38,8 @@ jsMath.Package(jsMath.Parser,{
    *  Implement \newcommand[n]{\name}{...}
    */
   NewCommand: function (name) {
-    var n = this.trimSpaces(this.GetBrackets(this.cmd+name)); if (this.error) return;
     var cs = this.trimSpaces(this.GetArgument(this.cmd+name)); if (this.error) return;
+    var n = this.trimSpaces(this.GetBrackets(this.cmd+name)); if (this.error) return;
     var def = this.GetArgument(this.cmd+name); if (this.error) return;
     if (n == '') {n = null}
     if (cs.charAt(0) == this.cmd) {cs = cs.substr(1)}

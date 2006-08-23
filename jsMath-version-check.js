@@ -26,7 +26,7 @@
 /********************************************************************/
 
 jsMath.Controls.TestVersion = function () {
-  var version = 'v3.3c';
+  var version = 'v3.3d';
   var download = 'http://www.math.union.edu/locate/jsMath/download/jsMath.html';
 
   jsMath.Controls.panel.style.display = 'none';

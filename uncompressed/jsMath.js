@@ -67,7 +67,7 @@ if (!document.getElementById || !document.childNodes || !document.createElement)
 
 window.jsMath = {
   
-  version: "3.3c",  // change this if you edit the file, but don't edit this file
+  version: "3.3d",  // change this if you edit the file, but don't edit this file
   
   document: document,  // the document loading jsMath
   window: window,      // the window of the of loading document
@@ -1266,6 +1266,16 @@ jsMath.Browser = {
           jsMath.Setup.Script('jsMath-old-browsers.js');
         }
       }
+      //  Apparently, Konqueror wants the names without the hyphen
+      jsMath.Add(jsMath.styles,{
+        '.typeset .cmr10':    'font-family: jsMath-cmr10, jsMath cmr10, serif',
+        '.typeset .cmbx10':   'font-family: jsMath-cmbx10, jsMath cmbx10, jsMath-cmr10, jsMath cmr10',
+        '.typeset .cmti10':   'font-family: jsMath-cmti10, jsMath cmti10, jsMath-cmr10, jsMath cmr10',
+        '.typeset .cmmi10':   'font-family: jsMath-cmmi10, jsMath cmmi10',
+        '.typeset .cmsy10':   'font-family: jsMath-cmsy10, jsMath cmsy10',
+        '.typeset .cmex10':   'font-family: jsMath-cmex10, jsMath cmex10'
+      });
+      jsMath.Font.testFont = "jsMath-cmex10, jsMath cmex10";
     }
   }
 
@@ -1278,6 +1288,7 @@ jsMath.Browser = {
  */
 jsMath.Font = {
   
+  testFont: "jsMath-cmex10",
   fallback: "symbol", // the default fallback method
   register: [],       // list of fonts registered before jsMath.Init()
 
@@ -1327,7 +1338,7 @@ jsMath.Font = {
    *  If they are found, load the BaKoMa encoding information.
    */
   CheckTeX: function () {
-    var wh = jsMath.BBoxFor('<span style="font-family: jsMath-cmex10, serif">'+jsMath.TeX.cmex10[1].c+'</span>');
+    var wh = jsMath.BBoxFor('<span style="font-family: '+jsMath.Font.testFont+', serif">'+jsMath.TeX.cmex10[1].c+'</span>');
     jsMath.nofonts = ((wh.w*3 > wh.h || wh.h == 0) && !this.Test1('cmr10',null,null,'jsMath-'));
     if (jsMath.nofonts && (navigator.platform != "MacPPC" ||
         jsMath.browser != 'Mozilla' || !jsMath.Browser.VersionAtLeast(1.5))) {
@@ -2632,7 +2643,8 @@ jsMath.Add(jsMath.Box,{
     var c = jsMath.TeX[font][C]; if (!c.tclass) {c.tclass = font}
     if (c.img != null) {return this.TeXnonfallback(C,font,style,size)}
     if (c.h != null && c.a == null) {c.a = c.h-1.1*jsMath.TeX.x_height}
-    var box = this.Text(c.c,c.tclass,style,size,c.a || 0,c.d || 0);
+    var a = c.a; var d = c.d; // avoid Firefox warnings
+    var box = this.Text(c.c,c.tclass,style,size,a,d);
     var scale = jsMath.Typeset.TeX(style,size).scale;
     if (c.bh != null) {
       box.bh = c.bh*scale;
@@ -6002,7 +6014,7 @@ jsMath.Translate = {
     if (!obj.getElementsByTagName) return null;
     var math = obj.getElementsByTagName('div');
     for (var k = 0; k < math.length; k++) {
-      if (math[k].className.match(/(^| )math( |$)/)) {
+      if (math[k].className && math[k].className.match(/(^| )math( |$)/)) {
         if (jsMath.Browser.renameOK && obj.getElementsByName) 
                {math[k].setAttribute('name','_jsMath_')}
           else {element[element.length] = math[k]}
@@ -6010,7 +6022,7 @@ jsMath.Translate = {
     }
     math = obj.getElementsByTagName('span');
     for (var k = 0; k < math.length; k++) {
-      if (math[k].className.match(/(^| )math( |$)/)) {
+      if (math[k].className && math[k].className.match(/(^| )math( |$)/)) {
         if (jsMath.Browser.renameOK && obj.getElementsByName) 
                {math[k].setAttribute('name','_jsMath_')}
           else {element[element.length] = math[k]}
