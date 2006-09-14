@@ -125,7 +125,9 @@ window.jsMath = {
                                  + 'z-index:103; width:auto;',
     '#jsMath_panel .disabled': 'color:#888888',
     '#jsMath_panel .infoLink': 'font-size:85%',
-    '#jsMath_panel td, tr, table': 'border:0px; padding:0px; margin:0px;',
+    '#jsMath_panel td':        'border:0px; padding:0px; margin:0px;',
+    '#jsMath_panel tr':        'border:0px; padding:0px; margin:0px;',
+    '#jsMath_panel table':     'border:0px; padding:0px; margin:0px;',
     '#jsMath_button':          'position:fixed; bottom:1px; right:2px; background-color:white; '
                                  + 'border: solid 1px #959595; margin:0px; padding: 0px 3px 1px 3px; '
                                  + 'z-index:102; color:black; text-decoration:none; font-size:x-small; '
