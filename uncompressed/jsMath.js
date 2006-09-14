@@ -67,7 +67,7 @@ if (!document.getElementById || !document.childNodes || !document.createElement)
 
 window.jsMath = {
   
-  version: "3.3d",  // change this if you edit the file, but don't edit this file
+  version: "3.3e",  // change this if you edit the file, but don't edit this file
   
   document: document,  // the document loading jsMath
   window: window,      // the window of the of loading document
@@ -125,6 +125,7 @@ window.jsMath = {
                                  + 'z-index:103; width:auto;',
     '#jsMath_panel .disabled': 'color:#888888',
     '#jsMath_panel .infoLink': 'font-size:85%',
+    '#jsMath_panel td, tr, table': 'border:0px; padding:0px; margin:0px;',
     '#jsMath_button':          'position:fixed; bottom:1px; right:2px; background-color:white; '
                                  + 'border: solid 1px #959595; margin:0px; padding: 0px 3px 1px 3px; '
                                  + 'z-index:102; color:black; text-decoration:none; font-size:x-small; '
@@ -1605,7 +1606,7 @@ jsMath.Controls = {
       this.isLocalCookie = 1;
     }
     if (cookies.match(/jsMath=([^;]+)/)) {
-      var data = RegExp.$1.split(/,/);
+      var data = unescape(RegExp.$1).split(/,/);
       for (var i = 0; i < data.length; i++) {
         var x = data[i].match(/(.*):(.*)/);
         if (x[2].match(/^\d+$/)) {x[2] = 1*x[2]} // convert from string
@@ -1615,7 +1616,7 @@ jsMath.Controls = {
     }
   },
   localGetCookie: function () {
-    return unescape(jsMath.window.location.search.substr(1));
+    return jsMath.window.location.search.substr(1);
   },
   
   /*
@@ -1633,6 +1634,7 @@ jsMath.Controls = {
       if (warn == 2) {return 'jsMath='+escape(cookie)}
       this.localSetCookie(cookie,warn);
     } else {
+      cookie = escape(cookie);
       if (cookie == '') {warn = 0}
       if (this.cookiePath) {cookie += '; path='+this.cookiePath}
       if (this.cookieDomain) {cookie += '; domain='+this.cookieDomain}
@@ -4695,6 +4697,7 @@ jsMath.Package(jsMath.Parser,{
     displaylines: ['Matrix',null,null,['c'],null,3,'D'],
     cr:         'HandleRow',
     '\\':       'HandleRow',
+    newline:    'HandleRow',
     noalign:    'HandleNoAlign',
     eqalignno:  ['Matrix',null,null,['r','l','r'],[5/8,3],3,'D'],
     leqalignno: ['Matrix',null,null,['r','l','r'],[5/8,3],3,'D'],
@@ -5876,7 +5879,7 @@ jsMath.Translate = {
    */
   ResetHidden: function (element) {
     element.innerHTML =
-      '<span style="visibility: hidden; position:absolute; top:0px;left:0px;"></span>'
+      '<span style="visibility:hidden; position:absolute; top:0px;left:0px; text-indent:0px"></span>'
         + jsMath.Browser.operaHiddenFix; // needed by Opera in tables
     element.className = '';
     jsMath.hidden = element.firstChild;
