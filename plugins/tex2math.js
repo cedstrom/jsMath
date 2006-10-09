@@ -229,9 +229,10 @@ jsMath.Add(jsMath.tex2math,{
           break;
 
         case '\\$':
-          if (this.search.end == null && this.fixEscapedDollars) {
+          if (this.search.end == null && this.fixEscapedDollars && !this.callback) {
             element.nodeValue = element.nodeValue.substr(0,index)
                               + element.nodeValue.substr(index+1);
+            this.pattern.lastIndex--;
           }
           break;
       }
