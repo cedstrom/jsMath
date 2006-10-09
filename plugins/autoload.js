@@ -279,7 +279,7 @@ jsMath.Add(jsMath.Autoload,{
       jsMath.CustomSearch = function () {};
       jsMath.Macro = function () {};
       jsMath.Synchronize = function (code,data) {
-        if (typeof(code) != 'string') {code(data)} else {eval(code)}
+        if (typeof(code) == 'string') {eval(code)} else {code(data)}
       };
       jsMath.Autoload.Script.RunStack(); // perform pending commands
       jsMath.Autoload.setMessage();
