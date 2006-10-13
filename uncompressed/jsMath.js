@@ -67,7 +67,7 @@ if (!document.getElementById || !document.childNodes || !document.createElement)
 
 window.jsMath = {
   
-  version: "3.3e",  // change this if you edit the file, but don't edit this file
+  version: "3.3f",  // change this if you edit the file, but don't edit this file
   
   document: document,  // the document loading jsMath
   window: window,      // the window of the of loading document
@@ -4415,6 +4415,7 @@ jsMath.Package(jsMath.Parser,{
     nwarrow:          [3,2,0x2D],
     swarrow:          [3,2,0x2E],
 
+    minuschar:  [3,2,0x00], // for longmapsto
     hbarchar:   [0,0,0x16], // for \hbar
     lhook:      [3,1,0x2C],
     rhook:      [3,1,0x2D],
@@ -4591,7 +4592,7 @@ jsMath.Package(jsMath.Parser,{
     Relbar:             ['Macro','\\mathrel='],
     bowtie:             ['Macro','\\mathrel\\triangleright\\joinrel\\mathrel\\triangleleft'],
     models:             ['Macro','\\mathrel|\\joinrel='],
-    mapsto:             ['Macro','\\mapstochar\\rightarrow'],
+    mapsto:             ['Macro','\\mathrel{\\mapstochar\\rightarrow}'],
     rightleftharpoons:  ['Macro','\\vcenter{\\mathrel{\\rlap{\\raise3mu{\\rightharpoonup}}}\\leftharpoondown}'],
     hookrightarrow:     ['Macro','\\lhook\\joinrel\\rightarrow'],
     hookleftarrow:      ['Macro','\\leftarrow\\joinrel\\rhook'],
@@ -4599,7 +4600,7 @@ jsMath.Package(jsMath.Parser,{
     longrightarrow:     ['Macro','\\relbar\\joinrel\\rightarrow'],
     longleftarrow:      ['Macro','\\leftarrow\\joinrel\\relbar'],
     Longleftarrow:      ['Macro','\\Leftarrow\\joinrel\\Relbar'],
-    longmapsto:         ['Macro','\\mapstochar\\char{cmsy10}{0}\\joinrel\\rightarrow'],
+    longmapsto:         ['Macro','\\mathrel{\\mapstochar\\minuschar\\joinrel\\rightarrow}'],
     longleftrightarrow: ['Macro','\\leftarrow\\joinrel\\rightarrow'],
     Longleftrightarrow: ['Macro','\\Leftarrow\\joinrel\\Rightarrow'],
     iff:                ['Macro','\\;\\Longleftrightarrow\\;'],

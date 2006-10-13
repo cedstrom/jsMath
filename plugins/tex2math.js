@@ -229,7 +229,7 @@ jsMath.Add(jsMath.tex2math,{
           break;
 
         case '\\$':
-          if (this.search.end == null && this.fixEscapedDollars && !this.callback) {
+          if (this.search.end == null && this.fixEscapedDollars) {
             element.nodeValue = element.nodeValue.substr(0,index)
                               + element.nodeValue.substr(index+1);
             this.pattern.lastIndex--;
@@ -280,7 +280,6 @@ jsMath.Add(jsMath.tex2math,{
    *  SPAN or DIV element marked as CLASS="math".
    */
   EncloseMath: function (element) {
-    if (this.callback) {if (!this.callback()) {return null}}
     var search = this.search;
     var close = search.close;
     if (search.cpos == close.length) {close = close.nextSibling}
