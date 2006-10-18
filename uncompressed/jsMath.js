@@ -67,7 +67,7 @@ if (!document.getElementById || !document.childNodes || !document.createElement)
 
 window.jsMath = {
   
-  version: "3.3f",  // change this if you edit the file, but don't edit this file
+  version: "3.3g",  // change this if you edit the file, but don't edit this file
   
   document: document,  // the document loading jsMath
   window: window,      // the window of the of loading document
@@ -87,7 +87,7 @@ window.jsMath = {
     '.typeset span':      'text-align: left; border:0px; margin:0px; padding:0px',
     
     '.typeset .normal':   'font-family: serif; font-style: normal; font-weight: normal',
-
+    
     '.typeset .size0':    'font-size: 50%',  // tiny (\scriptscriptsize)
     '.typeset .size1':    'font-size: 60%',  //       (50% of \large for consistency)
     '.typeset .size2':    'font-size: 70%',  // scriptsize
@@ -1162,6 +1162,8 @@ jsMath.Browser = {
         // MSIE needs this NOT to be inline-block
         jsMath.styles['.typeset .spacer'] =
               jsMath.styles['.typeset .spacer'].replace(/display:inline-block/,'');
+        // MSIE can't insert DIV's into text nodes, so tex2math must use SPAN's to fake DIV's
+        jsMath.styles['.tex2math_div'] = jsMath.styles['div.typeset'] + '; width: 100%; display: inline-block';
         // MSIE will rescale images if the DPIs differ
         if (screen.deviceXDPI && screen.logicalXDPI 
              && screen.deviceXDPI != screen.logicalXDPI) {
