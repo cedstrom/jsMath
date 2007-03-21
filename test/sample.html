@@ -106,6 +106,17 @@ Note also that jsMath will automatically ignore the text within
    $f\colon X\to Y$, \(x^2 \gt 5\),
    $$1\over 1+x^2$$ and \[\martrix{a& b\cr c& d}.\]
 </PRE>
+<P>
+
+Note that since the &lt; and &gt; symbols are used to denote HTML tags,
+these can be hard to incorporate into your <SPAN CLASS="math">\rm\TeX</SPAN>
+code.  Often, putting spaces around the &lt; or &gt; will make it work, but
+it is probably better to use <CODE>\lt</CODE> and <CODE>\gt</CODE> instead.
+Also note that the <CODE>tex2math</CODE> plugin does not allow any HTML
+tags to be within the math delimiters, with the exception of
+<CODE>&lt;BR&gt;</CODE>, which is ignored.
+<p>
+
 See the <A
 HREF="http://www.math.union.edu/locate/jsMath/authors/tex2math.html">tex2math
 documentation</A> for more information.
