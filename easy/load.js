@@ -101,7 +101,12 @@ jsMath.Easy = {
   //
   //  Allow jsMath to enter global mode?
   //
-  allowGlobal: 1
+  allowGlobal: 1,
+  
+  //
+  //  Disable image fonts?  (In case you don't load them on your server.)
+  //
+  noImageFonts: 0
   
 };
 
@@ -113,5 +118,5 @@ jsMath.Easy = {
 /****************************************************************/
 /****************************************************************/
 
-document.write('<SCRIPT SRC="'+jsMath.Easy.root+'/jsMath-easy-load.js"></SCRIPT>');
+document.write('<SCRIPT SRC="'+jsMath.Easy.root+'/jsMath-easy-load.js"><'+'/SCRIPT>');
 

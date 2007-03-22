@@ -55,6 +55,8 @@ if (!jsMath.Easy.allowGlobal) {
   jsMath.noShowGlobal = 1;
 }
 
+if (jsMath.Easy.noImageFonts) {jsMath.noImgFonts = 1}
+
 if (jsMath.Easy.processSingleDollars ||
     jsMath.Easy.processDoubleDollars ||
     jsMath.Easy.processSlashParens ||
