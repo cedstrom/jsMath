@@ -128,6 +128,12 @@ jsMath.Add(jsMath.Controls,{
 
     this.panel.style.display = "block";
     this.openMain = 0;
+
+    if (jsMath.Browser.msieMoveButtonHack) {
+      this.panel.style.left = "0px";
+      this.panel.style.top = "0px";
+      jsMath.Controls.MoveButton();
+    }
   },
 
   Options: function () {
@@ -178,6 +184,12 @@ jsMath.Add(jsMath.Controls,{
     }
 
     this.panel.style.display = "block";
+
+    if (jsMath.Browser.msieMoveButtonHack) {
+      this.panel.style.left = "0px";
+      this.panel.style.top = "0px";
+      jsMath.Controls.MoveButton();
+    }
   },
 
   GetPanel: function (name) {

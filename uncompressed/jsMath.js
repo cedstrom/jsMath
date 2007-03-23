@@ -1184,6 +1184,7 @@ jsMath.Browser = {
             + jsMath.styles['#jsMath_button'].replace(/position:fixed/,"position:absolute").replace(/width:auto/,"");
           jsMath.window.attachEvent("onscroll",jsMath.Controls.MoveButton);
           if (this.IE7) jsMath.window.attachEvent("onresize",jsMath.Controls.MoveButton);
+	  this.msieMoveButtonHack = this.IE7;
 	}
         // Make MSIE put borders around the whole button
         jsMath.styles['#jsMath_noFont .link'] += " display: inline-block;";
@@ -1616,23 +1617,36 @@ jsMath.Controls = {
     if (!this.cookie.button) {button.style.display = "none"}
   },
   
- /*
-  *  MSIE doesn't implement position:fixed, so redraw the button on scrolls.
-  */
+  /*
+   *  Since MSIE doesn't handle position:float, we need to have the
+   *  window repositioned every time the window scrolls.  We do that
+   *  by hiding then showing the window, which apparently causes MSIE
+   *  to recompute its location.  In MSIE7, that doesn't work anymore,
+   *  so we have to move the window by hand.
+   */
   MoveButton: function () {
-    if (!this.button) {this.button = jsMath.Element("button")}
+    var controls = jsMath.Controls;
+    if (!controls.button) {controls.button = jsMath.Element("button")}
+    if (controls.button) controls.MoveElement(controls.button,3,2);
+    var dx = 20; var dy = 20;
+    if (controls.button) {dy = controls.button.offsetHeight + 6; dx = dy + 5}
+    if (controls.panel)  controls.MoveElement(controls.panel,dx,dy);
+  },
+  MoveElement: function (obj,dx,dy) {
     if (jsMath.Browser.IE7) {
       var body = document.body;
-      this.button.style.right = "auto";
-      this.button.style.bottom = "auto";
+      obj.style.right = "auto";
+      obj.style.bottom = "auto";
       //
       // This position can't be overridden by CSS (grr)
+      // (Perhaps we can look up the current position and which sides it's 
+      // attached to and use those.  What a pain.)
       //
-      this.button.style.left = body.clientWidth + body.scrollLeft - this.button.offsetWidth - 3 + "px";
-      this.button.style.top = body.clientHeight + body.scrollTop - this.button.offsetHeight - 2 + "px";
+      obj.style.left = body.clientWidth + body.scrollLeft - obj.offsetWidth - dx + "px";
+      obj.style.top = body.clientHeight + body.scrollTop -  obj.offsetHeight - dy + "px";
     } else {
-      this.button.style.visibility = "hidden";
-      this.button.style.visibility = "visible";
+      obj.style.visibility = "hidden";
+      obj.style.visibility = "visible";
     }
   },
 
@@ -4416,6 +4430,8 @@ jsMath.Package(jsMath.Parser,{
     le:          [3,2,0x14],
     geq:         [3,2,0x15],
     ge:          [3,2,0x15],
+    lt:          [3,1,0x3C],  // extra since < and > are hard
+    gt:          [3,1,0x3E],  //   to get in HTML
     succ:        [3,2,0x1F],
     prec:        [3,2,0x1E],
     approx:      [3,2,0x19],
@@ -4481,6 +4497,8 @@ jsMath.Package(jsMath.Parser,{
     ']':                [0,0,0x5D,3,0x03],
     '<':                [0,2,0x68,3,0x0A],
     '>':                [0,2,0x69,3,0x0B],
+    '\\lt':             [0,2,0x68,3,0x0A],  // extra since < and > are
+    '\\gt':             [0,2,0x69,3,0x0B],  //  hard to get in HTML
     '/':                [0,0,0x2F,3,0x0E],
     '|':                [0,2,0x6A,3,0x0C],
     '.':                [0,0,0x00,0,0x00],
