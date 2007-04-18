@@ -24,4 +24,10 @@
  */
 
 if (!window.jsMath) {window.jsMath = {}}
-window.jsMath.noImgFonts = 1;
+jsMath.noImgFonts = 1;
+
+if (!jsMath.Font) {jsMath.Font = {}}
+jsMath.Font.extra_message =
+    'Extra TeX fonts not found: <b><span id="jsMath_ExtraFonts"></span></b><br/>'
+      + 'Using unicode fonts instead.  This may be slow and might not print well.<br/>\n'
+      + 'Use the jsMath control panel to get additional information.',
