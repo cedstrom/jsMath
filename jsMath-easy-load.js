@@ -80,8 +80,9 @@ if (jsMath.Easy.processSingleDollars ||
   }
 }
 
+if (!jsMath.Autoload) {jsMath.Autoload = {}}
+jsMath.Autoload.root = jsMath.Easy.root+'/';
 if (jsMath.Easy.autoload) {
-  if (!jsMath.Autoload) {jsMath.Autoload = {}}
   jsMath.Autoload.findTeXstrings = 0;
   jsMath.Autoload.findLaTeXstrings = 0;
   jsMath.Autoload.findCustomStrings = jsMath.Easy.customDelimiters;
