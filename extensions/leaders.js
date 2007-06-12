@@ -83,10 +83,11 @@ jsMath.Add(jsMath.Box,{
 jsMath.Package(jsMath.Parser,{
   
   macros: {
-    overbrace:       ['HandleLeaders','downbrace',1],
-    underbrace:      ['HandleLeaders','upbrace',1,1],
-    overrightarrow:  ['HandleLeaders','rightarrow'],
-    overleftarrow:   ['HandleLeaders','leftarrow']
+    overbrace:          ['HandleLeaders','downbrace',1],
+    underbrace:         ['HandleLeaders','upbrace',1,1],
+    overrightarrow:     ['HandleLeaders','rightarrow'],
+    overleftarrow:      ['HandleLeaders','leftarrow'],
+    overleftrightarrow: ['HandleLeaders','leftrightarrow']
   },
   
   /*
@@ -96,7 +97,8 @@ jsMath.Package(jsMath.Parser,{
     downbrace:  {left: [3,0x7A], lmid: [3,0x7D], rmid: [3,0x7C], right: [3,0x7B]},
     upbrace:    {left: [3,0x7C], lmid: [3,0x7B], rmid: [3,0x7A], right: [3,0x7D]},
     leftarrow:  {left: [2,0x20], rep:   [2,0x00]},
-    rightarrow: {rep:  [2,0x00], right: [2,0x21]}
+    rightarrow: {rep:  [2,0x00], right: [2,0x21]},
+    leftrightarrow: {left: [2,0x20], rep: [2, 0x00], right: [2,0x21]}
   },
 
   /*
