@@ -92,6 +92,7 @@ if (jsMath.Easy.autoload) {
   jsMath.Autoload.loadFonts = jsMath.Easy.loadFonts;
 
   if (!document.body) {jsMath.Easy.autoloadCheck = 1}
+                 else {jsMath.Easy.autoloadReCheck = 1}
   document.write('<script src="'+jsMath.Autoload.root+'plugins/autoload.js"></script>');
   
 } else {
@@ -117,7 +118,9 @@ if (jsMath.Easy.autoload) {
 }
 
 jsMath.Easy.onload = function () {
-  if (jsMath.Easy.autoloadCheck) {jsMath.Autoload.Check()} else {jsMath.Autoload.ReCheck()}
+  if (jsMath.Easy.loaded) {return} else {jsMath.Easy.loaded = 1}
+  if (jsMath.Easy.autoloadCheck) jsMath.Autoload.Check();
+  if (jsMath.Easy.autoloadReCheck) jsMath.Autoload.ReCheck();
   if (jsMath.Easy.tex2math) {
     jsMath.Synchronize(function () {
       if (jsMath.Easy.findCustomSettings)

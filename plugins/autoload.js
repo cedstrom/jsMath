@@ -312,8 +312,10 @@ jsMath.Add(jsMath.Autoload,{
    *  and then do any pending commands.
    */
   LoadJsMath: function () {
+    if (this.loading) return;
     if (jsMath.loaded) {this.afterLoad(); return}
     if (this.root) {
+      this.loading = 1;
       this.setMessage('Loading jsMath...');
       this.Script.AfterLoad = this.afterLoad;
       this.Script.Load('jsMath.js');
@@ -322,6 +324,7 @@ jsMath.Add(jsMath.Autoload,{
     }
   },
   afterLoad: function () {
+    jsMath.Autoload.loading = 0;
     if (jsMath.tex2math.window) {jsMath.tex2math.window.jsMath = jsMath}
     //
     //  Handle MSIE bug where jsMath.window both is and is not the actual window
