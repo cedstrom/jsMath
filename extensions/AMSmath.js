@@ -63,6 +63,7 @@ jsMath.Package(jsMath.Parser,{
     varprojlim: ['Macro','\\mathop{\\underleftarrow{\\rm lim}}'],
     
     DeclareMathOperator: 'HandleDeclareOp',
+    operatorname: 'HandleOperatorName',
 
     genfrac:    'Genfrac',
     frac:       ['Genfrac',"","","",""],
@@ -119,6 +120,18 @@ jsMath.Package(jsMath.Parser,{
     var op = this.GetArgument(this.cmd+name); if (this.error) return;
     op = op.replace(/\*/g,'\\char{cmr10}{0x2A}').replace(/-/g,'\\char{cmr10}{0x2D}');
     jsMath.Parser.prototype.macros[cs] = ['Macro','\\mathop{\\rm '+op+'}'+limits];
+  },
+  
+  HandleOperatorName: function (name) {
+    var limits = "";
+    var op = this.trimSpaces(this.GetArgument(this.cmd+name)); if (this.error) return;
+    if (op == "*") {
+      limits = "\\limits";
+      op = this.trimSpaces(this.GetArgument(this.cmd+name)); if (this.error) return;
+    }
+    op = op.replace(/\*/g,'\\char{cmr10}{0x2A}').replace(/-/g,'\\char{cmr10}{0x2D}');
+    this.string = '\\mathop{\\rm '+op+'}'+limits+this.string.slice(this.i);
+    this.i = 0;
   },
   
   /*
