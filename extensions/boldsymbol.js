@@ -25,7 +25,7 @@
  *  
  *  ---------------------------------------------------------------------
  *
- *  Copyright 2006 by Davide P. Cervone
+ *  Copyright 2006-2007 by Davide P. Cervone
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -53,7 +53,8 @@ jsMath.Package(jsMath.Parser,{
     var fam = jsMath.TeX.fam
     var oldfam = [fam[0],fam[1],fam[2]];
     fam[0] = "cmbx10"; fam[1] = "cmmib10"; fam[2] = "cmbsy10";
-    var box = this.ProcessArg(this.cmd+name);
+    try{var box = this.ProcessArg(this.cmd+name)}
+      catch (e) {if (e != "restart") {this.error = e.message}}
     fam[0] = oldfam[0]; fam[1] = oldfam[1]; fam[2] = oldfam[2];
     if (this.error) return;
     this.mlist.Add(jsMath.mItem.Atom('ord',box));
