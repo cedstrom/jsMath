@@ -50,13 +50,13 @@ jsMath.Package(jsMath.Parser,{
    *  Implement \boldsymbol{...}
    */
   BoldSymbol: function (name) {
-    var fam = jsMath.TeX.fam
+    var fam = jsMath.TeX.fam; var restart = 0;
     var oldfam = [fam[0],fam[1],fam[2]];
     fam[0] = "cmbx10"; fam[1] = "cmmib10"; fam[2] = "cmbsy10";
     try{var box = this.ProcessArg(this.cmd+name)}
-      catch (e) {if (e != "restart") {this.error = e.message}}
+      catch (e) {restart = (e == "restart")}
     fam[0] = oldfam[0]; fam[1] = oldfam[1]; fam[2] = oldfam[2];
-    if (this.error) return;
+    if (this.error) return; if (restart) {alert('restart'); throw "restart"}
     this.mlist.Add(jsMath.mItem.Atom('ord',box));
   }
   
