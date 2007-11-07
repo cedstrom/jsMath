@@ -56,7 +56,7 @@ jsMath.Package(jsMath.Parser,{
     try{var box = this.ProcessArg(this.cmd+name)}
       catch (e) {restart = (e == "restart")}
     fam[0] = oldfam[0]; fam[1] = oldfam[1]; fam[2] = oldfam[2];
-    if (this.error) return; if (restart) {alert('restart'); throw "restart"}
+    if (this.error) return; if (restart) {throw "restart"}
     this.mlist.Add(jsMath.mItem.Atom('ord',box));
   }
   
