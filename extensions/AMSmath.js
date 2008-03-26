@@ -174,7 +174,7 @@ jsMath.Package(jsMath.Parser,{
   },
   
   /*
-   *  Implement AMS generalizes fraction
+   *  Implement AMS generalized fraction
    */
   Genfrac: function (name,data) {
     var left = data[0]; var right = data[1];
