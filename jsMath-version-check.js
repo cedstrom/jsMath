@@ -26,7 +26,7 @@
 /********************************************************************/
 
 jsMath.Controls.TestVersion = function () {
-  var version = 'v3.4f';
+  var version = 'v3.5';
   var download = 'http://www.math.union.edu/locate/jsMath/download/jsMath.html';
 
   jsMath.Controls.panel.style.display = 'none';
@@ -43,5 +43,7 @@ jsMath.Controls.TestVersion = function () {
   }
 }
 
-jsMath.Message.Clear(); jsMath.Message.doClear();
-setTimeout('jsMath.Controls.TestVersion();',1);
+if (jsMath.Message != null) {
+  jsMath.Message.Clear(); jsMath.Message.doClear();
+  setTimeout('jsMath.Controls.TestVersion();',1);
+}
