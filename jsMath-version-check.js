@@ -8,7 +8,7 @@
  *
  *  ---------------------------------------------------------------------
  *
- *  Copyright 2004-2008 by Davide P. Cervone
+ *  Copyright 2004-2010 by Davide P. Cervone
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 /********************************************************************/
 
 jsMath.Controls.TestVersion = function () {
-  var version = 'v3.6c';
+  var version = 'v3.6d';
   var download = 'http://www.math.union.edu/locate/jsMath/download/jsMath.html';
 
   jsMath.Controls.panel.style.display = 'none';
